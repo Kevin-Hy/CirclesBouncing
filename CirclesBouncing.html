@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/CustomEase.min.js"></script>
+    <style type ="text/css">
+        body{
+            background-color: #36393e;
+        }
+        #mainCont{
+            border-style: solid;
+            width: 400px;
+            height: 350px;
+            background-color:rgb(1, 94, 1);
+        }
+        .circ1,.circ2{
+            fill:darkred;
+            stroke:black;
+            stroke-width: 2px;
+        }
+        .circ2{
+            fill:rgb(175, 99, 12);
+            stroke:black;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainCont">
+        <svg viewBox = "0 0 400 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image class = "box" href = "box.png" height="50" width="50" x="0" y="-150"/>
+        <circle class = "circ1" cx="41", cy="40" r="40"/>
+        <rect class = "line1" x="38" y="0" width="2" height="80"/><!--since spinning is hard to simulate,
+             line helps us make it look visible-->
+        <circle class = "circ2" cx="359", cy="40" r="40"/>
+        <rect class = "line2" x="357" y="0" width="2" height="80"/>
+        </svg>
+    </div>
+    <script type="text/javascript">
+        let tl = gsap.timeline();
+        gsap.set(".circ1, .line1, .circ2, .line2", {transformOrigin:"50% 50%"});
+        tl.to(".circ1,.line1",{duration: 2, y:269, rotation:90, ease:"bounce"})
+          .to(".circ1,.line1",{duration: 4, rotation:900, x:450},"-=0.5")
+          //second set of tweens for the cirlce object
+          .to(".circ2,.line2",{duration: 2.89, y:269, rotation:-90, ease:
+            CustomEase.create("custom", "M0,0 C0.14,0 0.242,0.438 0.272,0.561 0.313,0.728 0.354,0.963 0.362,1 0.37,0.985 0.414,0.738 0.455,0.676 0.51,0.591 0.596,0.643 0.606,0.656 0.662,0.73 0.719,0.981 0.726,0.998 0.788,0.914 0.84,0.936 0.859,0.95 0.878,0.964 0.897,0.985 0.911,0.998 0.922,0.994 0.939,0.984 0.954,0.984 0.969,0.984 1,1 1,1 ")},
+            "-=5.5")
+          .to(".circ2,.line2",{duration: 4, rotation:-900, x:-450},"-=5.5");
+    </script>
+</body>
+</html>
